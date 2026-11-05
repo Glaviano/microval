@@ -1,40 +1,26 @@
 # microval
 
-A high-performance Python package for **randomization and statistical validation of weighted unipartite and bipartite networks**.
+A Python package for **randomization and statistical validation of weighted unipartite and bipartite networks**.
 
-`microval` implements the **WEST**, **BiWEST**, **WES**, and **BiWES** null models using [Numba](https://numba.pydata.org/) for JIT compilation and parallel multithreading (`parallel=True`). It provides high-efficiency graph randomizers as well as end-to-end edge validation with empirical $p$-value estimation and multiple-testing corrections (**Bonferroni** and **Benjamini-Hochberg FDR**).
+`microval` implements the **WEST**, **BiWEST**, **WES**, and **BiWES** null models using Numba. These algorithms generate a sample of random matrices, each satisfying a specified set of constraints. The sample is then used to estimate the matrix of $p$-values for statistical validation.
 
 ---
 
 ## Overview of Null Models & Samplers
 
-Each sampler in `microval` is designed for a specific network topology and preserves an exact set of network properties (invariants) during randomization:
+Each sampler in `microval` is designed for a specific class of networks and preserves an exact set of network properties during randomization:
 
 | Method | Network Type | Invariants Preserved | Matrix Representation |
 | :--- | :--- | :--- | :--- |
 | **WEST** | Undirected Weighted | **Strength sequence** of all nodes | Symmetric square matrix ($n \times n$) |
-| **BiWEST** | Bipartite Weighted | **Strength sequence** of both node sets | Rectangular bi-adjacency matrix ($n_a \times n_b$) |
-| **WES** | Undirected Weighted | **Degree sequence** and **Weight sequence** (multiset of edge weights) | Symmetric square matrix ($n \times n$) |
-| **BiWES** | Bipartite Weighted | **Degree sequence** (both layers) and **Weight sequence** | Rectangular bi-adjacency matrix ($n_a \times n_b$) |
+| **BiWEST** | Undirected Bipartite Weighted | **Strength sequence** of both node sets | Rectangular bi-adjacency matrix ($n_a \times n_b$) |
+| **WES** | Undirected Weighted | **Degree sequence** and **Strenght sequence** | Symmetric square matrix ($n \times n$) |
+| **BiWES** | Undirected Bipartite Weighted | **Degree sequence** and **Strenght sequence** of both node sets| Rectangular bi-adjacency matrix ($n_a \times n_b$) |
 
-> **Note on Sampler Execution:**  
-> All samplers follow a two-step workflow:
-> 1. Call `pre_compute_<method>(A)` once to allocate and initialize the required internal Numba/NumPy data structures.
-> 2. Call `<METHOD>(...)` passing the pre-computed structures. This design avoids overhead and enables fast, repeated sampling on the same network instance.
-
----
 
 ## Installation
 
-Install in editable mode for development:
-
-```bash
-git clone https://github.com/your-username/microval.git
-cd microval
-pip install -e .
-```
-
-Or install as a standard package:
+The module can be installed as a standard package:
 
 ```bash
 pip install .
