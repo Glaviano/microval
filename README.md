@@ -39,12 +39,7 @@ pip install microval
 
 You can directly generate randomized networks for each of the 4 null models.
 
-### 1. WEST (Weighted Edge Swap with Threshold)
-- **Applicability:** Undirected weighted networks.
-- **Preserves:** The exact **strength sequence** (sum of weights per node). Edge weights and topology can change dynamically.
-- **Workflow:**
-  1. `pre_compute_west(A)`
-  2. `WEST(A, edgelist, n_link, n_step)`
+### 1. WEST (Weighted Strength Transfer)
 
 ```python
 import numpy as np
@@ -70,12 +65,7 @@ print(A_rand)
 
 ---
 
-### 2. BiWEST (Bipartite Weighted Edge Swap with Threshold)
-- **Applicability:** Bipartite weighted networks.
-- **Preserves:** The exact **row strength sequence** and **column strength sequence** across both partitions.
-- **Workflow:**
-  1. `pre_compute_biwest(A)`
-  2. `BiWEST(A, edgelist, n_link, n_step)`
+### 2. BiWEST (Bipartite Weighted Strength Transfer)
 
 ```python
 import numpy as np
@@ -101,14 +91,6 @@ print(B_rand)
 ---
 
 ### 3. WES (Weighted Edge Swap)
-- **Applicability:** Undirected weighted networks.
-- **Preserves:** 
-  - The **degree sequence** (number of connections per node).
-  - The **weight sequence** (the exact multiset of link weights present in the network).
-  - The **strength sequence** (as a consequence of the two conservation laws above).
-- **Workflow:**
-  1. `pre_compute_wes(A)`
-  2. `WES(A2, weight_dict, weight_dict2, unique_weights, unique_weights2, adj_list, adj_list2, n_iterations)`
 
 ```python
 import numpy as np
@@ -134,16 +116,7 @@ print(A_rand)
 ---
 
 ### 4. BiWES (Bipartite Weighted Edge Swap)
-- **Applicability:** Bipartite weighted networks.
-- **Preserves:**
-  - The **degree sequence** of both layers.
-  - The exact **weight sequence** (all edge weights are conserved and rearranged).
-  - The **strength sequence** of both layers.
-- **Workflow:**
-  1. `pre_compute_biwes(A)`
-  2. `BiWES(A2, weight_dict, weight_dict2, unique_weights, unique_weights2, adj_list, adj_list2, n_iterations)`
 
-```python
 import numpy as np
 from microval.samplers import BiWES, pre_compute_biwes
 
