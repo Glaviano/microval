@@ -116,7 +116,7 @@ print(A_rand)
 ---
 
 ### 4. BiWES (Bipartite Weighted Edge Swap)
-
+```python
 import numpy as np
 from microval.samplers import BiWES, pre_compute_biwes
 
