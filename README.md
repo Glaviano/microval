@@ -17,20 +17,21 @@ Each sampler in `microval` is designed for a specific class of networks and pres
 | **WES** | Undirected Weighted | **Degree sequence** and **Strenght sequence** | Symmetric square matrix ($n \times n$) |
 | **BiWES** | Undirected Bipartite Weighted | **Degree sequence** and **Strenght sequence** of both node sets| Rectangular bi-adjacency matrix ($n_a \times n_b$) |
 
+*(The netwrok must have only integer weights)*
+
 
 ## Installation
 
 The module can be installed as a standard package:
 
 ```bash
-pip install .
+pip install microval
 ```
 
 ### Dependencies
 - `numpy >= 1.21.0`
 - `numba >= 0.56.0`
 
-*(No heavy statistical libraries such as `statsmodels` or `pandas` are required.)*
 
 ---
 
